@@ -11,7 +11,7 @@ header {
   background: linear-gradient(to right, #800000, #d4af37);
   color: #fff;
   padding: 25px;
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 1000;
 }
