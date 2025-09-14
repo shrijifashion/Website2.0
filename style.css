@@ -11,6 +11,7 @@ header {
   background: linear-gradient(to right, #800000, #d4af37);
   color: #fff;
   padding: 25px;
+  position: relative;
   top: 0;
   z-index: 1000;
 }
@@ -99,7 +100,8 @@ header p { margin: 5px 0 0; font-size: 1.2em; }
 #backToTop:hover { background: #d4af37; color: #800000; }
 
 /* Slider */
-.slider { position: relative; overflow: hidden; max-width: 900px; margin: auto; }
+.slider { position: relative; overflow: auto;scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* mobile smooth */ max-width: 900px; margin: auto; }
 .slider-track { display: flex; transition: transform 0.5s ease; }
 .saree-card {
   min-width: 250px; max-width: 250px; margin: 10px;
