@@ -15,7 +15,7 @@ function renderSarees(from = 0, to = Infinity, list = products) {
       <p>Price: ₹${item.price}</p>
       <p>${item.details}</p>
       <a class="whatsapp-order" target="_blank"
-         href="https://wa.me/918200947518?text=${encodeURIComponent(`I want to order this saree: ${item.name} (₹${item.price})`)}">
+         href="https://wa.me/918200947518?text=${encodeURIComponent(`I want to order this saree: ${item.name} (₹${item.price})`) }">
          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
          <span>Click to order</span>
       </a>
@@ -78,13 +78,42 @@ function updateSlider(smooth = true) {
 }
 setInterval(slideNext, 3000);
 
-// Swipe support
+// ====== SWIPE (Mobile touch support) ======
 let startX = 0;
 track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
 track.addEventListener("touchend", e => {
   let diff = e.changedTouches[0].clientX - startX;
   if (diff > 50) slidePrev();
   if (diff < -50) slideNext();
+});
+
+// ====== DRAG-TO-SCROLL (Desktop hand scroll) ======
+let isDown = false;
+let dragStartX;
+let scrollStart;
+
+track.addEventListener("mousedown", (e) => {
+  isDown = true;
+  track.classList.add("dragging");
+  dragStartX = e.pageX;
+  scrollStart = track.scrollLeft;
+  e.preventDefault();
+});
+
+track.addEventListener("mouseleave", () => {
+  isDown = false;
+  track.classList.remove("dragging");
+});
+
+track.addEventListener("mouseup", () => {
+  isDown = false;
+  track.classList.remove("dragging");
+});
+
+track.addEventListener("mousemove", (e) => {
+  if (!isDown) return;
+  const dx = e.pageX - dragStartX;
+  track.scrollLeft = scrollStart - dx;
 });
 
 // ====== FORM SUBMIT ======
@@ -127,7 +156,8 @@ Please contact me at ${phone}.`;
       responseBox.classList.add("error");
     });
 });
-// Scroll Up button
+
+// ====== SCROLL UP BUTTON ======
 const scrollBtn = document.getElementById("scrollUpBtn");
 
 window.addEventListener("scroll", () => {
