@@ -23,7 +23,7 @@ header {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 1000;
 }
